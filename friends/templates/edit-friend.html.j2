@@ -1,0 +1,32 @@
+{% extends 'layouts/base.html.j2' %}
+
+{% block navigation %}
+  <nav>
+    <ul>
+      <li><a href="/">View Friend</a></li>
+      <li><a href="/add-friend">Add Friend</a></li>
+    </ul>
+  </nav>
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    {% if get['edit'] == 'error' %}
+      <div class="error">There was an error editing the friend!</div>
+    {% endif %}
+
+    <h2>Edit Friend</h2>
+    
+    <form action="/update-friend" method="post">
+      {{ form.csrf_token() }}
+      {{ form.name.label }}
+      {{ form.name() }}
+      {{ form.image.label }}
+      {{ form.image() }}
+      {{ form.invited.label }}
+      {{ form.invited() }}
+      {{ form.id() }}
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+{% endblock %}

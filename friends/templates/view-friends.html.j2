@@ -1,0 +1,45 @@
+{% extends 'layouts/base.html.j2' %}
+
+{% block navigation %}
+  <nav>
+    <ul>
+      <li><a href="/" class="current">View Friends</a></li>
+      <li><a href="/add-friend">Add Friend</a></li>
+    </ul>
+  </nav>
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    {% if get['add'] == 'success' %}
+      <div class="success">The friend was successfully invited to the Party!</div>
+    {% elif get['edit'] == 'success' %}
+      <div class="success">The friend was successfully edited!</div>
+    {% elif get['delete'] == 'success' %}
+      <div class="success">The friend was successfully deleted!</div>
+    {% elif get['delete'] == 'error' %}
+      <div class="error">There was a problem deleting the friend!</div>
+    {% endif %}
+
+    <h2>View Friends</h2>
+    
+    <div class="grid">
+      {% for friend in friends %}
+        <div class="friend">
+          <h3>{{ friend['name']|e }} {% if friend['invited'] == true %} (invited) {% endif %}</h3>
+          <img src="{{ url_for('static', filename='img/' + friend['image']|e) }}" alt="{{ friend['name']|e }}">
+
+          <form action="/delete-friend" method="post">
+            {{ form.csrf_token() }}
+            
+            <a href="/edit-friend?id={{ friend['id'] }}" class="button">Edit</a>
+            
+            {{ form.id(value=friend['id']) }}
+         
+            <button type="submit">Delete</button>
+          </form>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

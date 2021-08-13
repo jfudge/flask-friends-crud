@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>GET vs. POST</title>
+  <style media="screen">
+    body {
+      font-family: sans-serif;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <h1>GET Links and Forms</h1>
+    <p><a href="?link=clicked">Send to URL</a></p>
+    <form method="get">
+      <label for="name">Name:</label>
+      <input type="text" name="name" value="">
+      <button type="submit">Send to URL</button>
+    </form>
+  </section>
+  <section>
+    <h1>POST Forms</h1>
+    <form action="some-processing-script.py" method="post">
+      <label for="name">Name:</label>
+      <input type="text" name="name" value="">
+      <button type="submit">Send to POST</button>
+    </form>
+  </section>
+</body>
+</html>
